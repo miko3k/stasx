@@ -1,0 +1,69 @@
+& {
+$selected_tag = MAIN_COLOR
+$mobile_background = ALMOST_BLACK_COLOR
+$mobile_padding = 10px
+$mobile_tag_width = 160px
+$select_background = SELECT_BOX_BACKGROUND_IN_LEFT_PANEL
+
+li.selected > a > .button_label {
+    color $selected_tag
+}
+
+@media DESKTOP {
+    padding-top: 1px // outline was missing top row without this, quite ugly
+    overflow auto
+
+    ul {
+        margin 0 5px
+    }
+
+    li {
+        ENTRY(TAG_COLOR_ON_BRIGHT, TEXT_COLOR_ON_BRIGHT)
+        a {
+            padding 5px 10px
+            .button_icon {
+                margin-right 12px
+            }
+        }
+    }
+    li a:hover {
+        background-color $select_background
+        .button_label {
+            color SELECT_BOX_COLOR
+        }
+        .button_icon {
+            color TAG_COLOR_ON_BRIGHT_HOVER
+        }
+    }
+
+    li.selected > a:hover > .button_label {
+        color MAIN_COLOR_HOVER
+    }
+}
+
+@media MOBILE {
+    background-color $mobile_background
+    ul {
+        display flex
+        width: 100%
+        flex-flow row wrap
+        padding $mobile_padding
+        padding-bottom 0
+    }
+    li {
+        padding-bottom $mobile_padding
+        ENTRY(TAG_COLOR_ON_DARK, TEXT_COLOR_ON_DARK)
+
+        // depending on screen width, create columns
+        width: 100%
+        for columns in 2 3 4 {
+            @media (min-width: $mobile_tag_width * columns) {
+                width: "%s" % round(100% / columns, 2)
+            }
+        }
+    }
+}
+
+
+
+}

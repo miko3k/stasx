@@ -1,0 +1,274 @@
+@require 'fonts'
+
+$_desktop_min_width          = 720px
+$_site_background         = #ffffff
+$_normal_font_size        = 16px
+$_font                    = 'Roboto', sans-serif
+
+DESKTOP                   = '(min-width: $_desktop_min_width)'
+MOBILE                    = '(max-width: $_desktop_min_width - 1px)'
+MAIN_COLOR                = #e66249
+MAIN_COLOR_HOVER          = darken(MAIN_COLOR, 15)
+LEFT_PANEL_BACKGROUND     = darken($_site_background, 4)
+TAG_COLOR_ON_BRIGHT       = #476fe6
+TAG_COLOR_ON_BRIGHT_HOVER = darken(TAG_COLOR_ON_BRIGHT, 10)
+TAG_COLOR_ON_DARK         = lighten(TAG_COLOR_ON_BRIGHT, 6)
+BUTTON_TEXT_COLOR         = $_site_background
+BUTTON_TEXT_COLOR_DISABLED= lighten(MAIN_COLOR, 10)
+SELECT_BOX_BACKGROUND_IN_LEFT_PANEL = darken(LEFT_PANEL_BACKGROUND, 5)
+SELECT_BOX_BACKGROUND_IN_SITELIST = darken($_site_background, 5)
+SELECT_BOX_COLOR          = #988
+TEXT_COLOR_ON_DARK_HIGHLIGHTED = white
+TEXT_COLOR_ON_BRIGHT      = black
+TEXT_COLOR_ON_DARK        = #ccc
+ALMOST_BLACK_COLOR        = #222
+DARK_COLOR                = #474040
+ICON_FONT_SIZE            = 32px
+LINK_COLOR                = #ff5640
+LINK_COLOR_DISABLED       = desaturate(darken(LINK_COLOR, 15), 80)
+LINK_COLOR_HOVER          = desaturate(lighten(LINK_COLOR, 10), 40)
+
+
+body {
+    background-color $_site_background
+    font-size $_normal_font_size
+    margin 0
+    padding 0
+}
+
+FULLSCREEN() {
+    position fixed
+    left 0
+    right 0
+    top 0
+    bottom 0
+}
+
+ABSOLUTE(right = "", top = "", bottom = "", left = "", width = "", height = "") {
+    position absolute
+    left left unless left == ""
+    right right unless right == ""
+    top top unless top == ""
+    bottom bottom unless bottom == ""
+    width width unless width == ""
+    height height unless height == ""
+}
+
+#mobile_view_detector {
+    ABSOLUTE(left: 1px, top: 1px, height: 1px)
+    @media MOBILE {
+        width 1px
+    }
+    @media DESKTOP {
+        width 20px
+    }
+    z-index -10
+}
+
+@media DESKTOP {
+    TAGLIST_TOP           = 240px
+    DETAIL_WIDTH          = 40%
+    DETAIL_MAX_WIDTH      = 440px
+    LEFT_PANEL_MAX_WIDTH  = 360px
+    LEFT_PANEL_WIDTH      = 30%
+
+    LEFT_PANEL_WIDTH_RULES() {
+        width: LEFT_PANEL_WIDTH
+        max-width: LEFT_PANEL_MAX_WIDTH
+    }
+
+    .main_menu_container {
+        ABSOLUTE(left: 0, top: 0, bottom: 0)
+        z-index 1
+        LEFT_PANEL_WIDTH_RULES()
+    }
+
+    .main_container {
+        width: 100%
+        height: 100vh
+    }
+
+    .taglist_container {
+        LEFT_PANEL_WIDTH_RULES()
+        float: left
+        position: relative // z-index doesn't work otherwise
+        margin-top: TAGLIST_TOP
+        height: 'calc(100% - %s)' % TAGLIST_TOP
+        z-index 2
+    }
+
+    .sitelist_container {
+        height: 100%
+    }
+
+    .detail_container {
+        float: right
+        width: DETAIL_WIDTH
+        max-width: DETAIL_MAX_WIDTH
+        position: relative
+        height: 100%
+        z-index 2
+    }
+}
+
+@media MOBILE {
+    MAIN_MENU_HEIGHT = 60px
+    body {
+        display flex
+        flex-flow column
+        height 100vh
+
+        .main_menu_container {
+            flex 0 0 MAIN_MENU_HEIGHT
+        }
+
+        .main_container {
+            flex 1 1
+            overflow auto
+        }
+    }
+}
+
+input, textarea {
+    font-size $_normal_font_size
+    min-width 10px // by default, it is -moz-min-content, which is too big
+}
+
+* {
+    box-sizing border-box
+    font-family $_font
+    margin 0
+    padding 0
+}
+
+a {
+    text-decoration none
+}
+
+.a_button {
+    transition background-color 0.6s, color 0.6s
+    .button_label {
+        transition @transition
+    }
+    .button_icon {
+        transition @transition
+    }
+}
+
+dl, ul {
+    list-style-type none
+}
+
+dd, dt, li {
+    text-indent 0
+}
+
+pre {
+    // http://stackoverflow.com/questions/248011/how-do-i-wrap-text-in-a-pre-tag */
+    word-wrap break-word       // Internet Explorer 5.5+
+    white-space pre-wrap
+}
+
+ENTRY(icon_color, text_color) {
+    .a_button {
+        display flex
+        align-items: center
+
+        .button_label {
+            overflow: hidden
+            text-overflow: ellipsis
+            white-space: nowrap
+            color text_color
+        }
+
+        .button_icon {
+            margin-right 10px
+            font-size ICON_FONT_SIZE
+            color icon_color
+        }
+    }
+}
+
+
+.buttons {
+    background-color MAIN_COLOR
+    flex 0 0 auto;
+    display flex
+    flex-flow row
+
+    > .a_button {
+        flex 1 1 0
+        color BUTTON_TEXT_COLOR_DISABLED
+        padding 10px 0
+        display flex
+        align-items center
+        align-content stretch
+        justify-content center
+
+        &[href] {
+            color BUTTON_TEXT_COLOR
+        }
+
+        @media DESKTOP {
+            &[href]:hover {
+                background-color MAIN_COLOR_HOVER
+            }
+        }
+
+        .button_icon {
+            font-size (($_normal_font_size + ICON_FONT_SIZE) / 2)
+        }
+
+        .button_label {
+            font-weight bold
+        }
+    }
+}
+
+.main_menu_container {
+    @import main_menu
+}
+
+.taglist_container {
+    @import taglist
+}
+
+.sitelist_container {
+    @import sitelist
+}
+
+.popup_form {
+    @import form
+}
+
+.popup_container {
+    @import modal
+}
+
+.detail_container {
+    @import detail
+}
+
+// hacks for google!
+
+// this frame appreaded at the bottom of the page and fucked up the layout
+#ssIFrame_google {
+    left: 0 !important;
+    top: 0 !important;
+    visibility: hidden;
+}
+
+// make picker a bit more responsive
+@media MOBILE {
+    .picker-dialog {
+        top: 0 !important;
+        .picker-dialog-content {
+            height: calc(100vh - 3px) !important  // no idea why, but vertical scroll bars appeared if
+        }
+    }
+}
+
+
+
+
+

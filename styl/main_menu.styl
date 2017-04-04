@@ -1,0 +1,72 @@
+& {
+$background = LEFT_PANEL_BACKGROUND
+$icon_background = MAIN_COLOR
+$icon_background_hover = MAIN_COLOR_HOVER
+$icon_color = BUTTON_TEXT_COLOR
+$icon_size  = ICON_FONT_SIZE
+$label_background_hover = SELECT_BOX_BACKGROUND_IN_LEFT_PANEL
+$label_color = TEXT_COLOR_ON_BRIGHT
+$label_color_hover = SELECT_BOX_COLOR
+$spacing = 10px
+
+overflow hidden
+display flex
+
+@media MOBILE {
+    flex-flow: row nowrap;
+    justify-content: space-around
+    align-items: center
+    background $icon_background
+
+    .a_button {
+        .button_label {
+            display: none
+        }
+
+        .button_icon {
+            color $icon_color
+            font-size $icon_size
+        }
+    }
+}
+
+@media DESKTOP {
+    flex-flow column
+    padding: $spacing
+    background-color $background
+    justify-content flex-start
+    box-shadow 0px 0px 5px black
+    border-right: 1px solid black
+
+    .a_button {
+        margin-bottom: $spacing
+
+        display flex
+        flex-flow row
+        justify-content flex-start
+        align-items center
+
+        > .button_icon {
+            font-size $icon_size
+            padding: 5px
+            background-color: $icon_background
+            color: $icon_color
+        }
+
+        > .button_label {
+            padding-left: $spacing
+            color: $label_color
+        }
+
+        &:hover {
+            background-color $label_background_hover
+            >.button_label {
+                color $label_color_hover
+            }
+            >.button_icon {
+                background-color: $icon_background_hover
+            }
+        }
+    }
+}
+}

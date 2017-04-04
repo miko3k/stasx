@@ -1,0 +1,79 @@
+& {
+
+$border = 1px solid black
+$background_color = ALMOST_BLACK_COLOR
+$background_color_header = DARK_COLOR
+$drop_shadow_color = rgba(0,0,0,50%)
+$backdrop_color = rgba(128, 128, 128, 0.5)
+
+FULLSCREEN()
+z-index 20
+
+@media DESKTOP {
+    background-color $backdrop_color
+
+    .popup_form {
+        // left and top will be overrided by javascript
+        ABSOLUTE(left: 200px, top: 200px, width: 50%)
+        min-width: 500px
+        max-width: 800px
+        background-color $background-color
+        border $border
+        box-shadow 4px 4px 4px $drop_shadow_color
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 21px;
+            left: -16px;
+            width: 30px;
+            height: 30px;
+            background-color $background_color_header
+            border-top: $border
+            border-left: $border
+            transform:rotate(-45deg);
+            -moz-transform:rotate(-45deg);
+            -webkit-transform:rotate(-45deg);
+        }
+
+        h1 {
+            font-weight bold
+            padding 20px
+            padding-left 30px
+            border-top 5px solid MAIN_COLOR
+        }
+
+        .window_content {
+            padding 10px 25px
+        }
+    }
+}
+
+@media MOBILE {
+    .popup_form {
+        width 100%
+        height 100%
+
+        .buttons {
+            order 1
+        }
+
+        h1 {
+            header_item()
+            order 2
+        }
+
+        .window_tabs {
+            order 3
+        }
+
+        .window_content {
+            padding 10px 25px
+            order 4
+        }
+    }
+}
+
+
+}

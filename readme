@@ -1,0 +1,41 @@
+required js version:
+    Array.prototype.filter: IE9
+    Array.prototype.every: IE9
+    unprefixed flexbox: IE11
+    trim: IE9
+    promise.all - edge
+    subtle - edge
+    arraybuffer.slice - ie11
+
+todo:
+    allow indexing in google
+        - this has to be in encrypted part of file??
+
+coding notes
+    stylus:
+        we start file & { .. } to create "file" scope
+        naming conventions
+            GLOBAL_VARIABLES
+            $local_variables
+            $_local_variables_in_main_module
+
+google:
+    we have to ask for user id, we don't use it, but we have to ask, sorry
+
+security:
+    https://tonyarcieri.com/whats-wrong-with-webcrypto
+
+    Common vulnerabilities:
+        <https://www.w3.org/TR/html/introduction.html#writing-secure-applications-with-html>
+        Not validating user input
+        Cross-site scripting (XSS)
+        SQL injection
+            - not vulerable
+                - not using innerHtml
+                - not using url parameters
+
+        Cross-site request forgery (CSRF)
+            - not using form submission, get or post parameter
+
+        Clickjacking
+            FIXME!!

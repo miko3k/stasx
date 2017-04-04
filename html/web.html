@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <!-- @ifdef DEBUG -->
+        <script src="http://localhost:35729/livereload.js"></script>
+        <script>var DEBUG=true;</script>
+         <!-- @endif -->
+        <script src="script.js"></script>
+        <script src="zxcvbn.js" async></script>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <body>
+        <noscript>
+            This doesn't work without scripting! Sorry...
+        </noscript>
+        <div id='mobile_view_detector'></div>
+
+        <div class='main_menu_container' id='main_menu'>
+        </div>
+        <div class='main_container'>
+            <div class='detail_container' id='detail' style='display:none'>
+                <div class='detail_content'>
+                    <dl class="body_container" id="detail_body"></dl>
+                    <div class="buttons" id="detail_buttons"></div>
+                </div>
+                <form class='popup_form' id='detail_form' style="display:none">
+                    <!--                    <div class='body_container' id='detail_form_body'></div>
+                    <div class='buttons_container' id='detail_form_buttons'></div>-->
+                </form>
+            </div>
+            <div class='taglist_container'>
+                <ul id='taglist'></ul>
+            </div>
+            <div class='sitelist_container'>
+                <ul id="sitelist"></ul>
+                <div class='empty_div' id='sitelist_empty'>File is empty</div>
+            </div>
+        </div>
+        <div class='popup_container' id='popup_container' style="display:none"/>
+             <form id='popup_form' class='popup_form' autocomplete='off'/>
+             </form>
+        </div>
+    </body>
+</html>

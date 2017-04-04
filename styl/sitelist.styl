@@ -1,0 +1,52 @@
+& {
+
+$entry_color = #FFD300
+$tag_color = TAG_COLOR_ON_BRIGHT
+$color = TEXT_COLOR_ON_BRIGHT
+$select_background = SELECT_BOX_BACKGROUND_IN_SITELIST
+$select_label = SELECT_BOX_COLOR
+$select_tag = TAG_COLOR_ON_BRIGHT_HOVER
+$select_entry = darken($entry_color, 5)
+
+overflow auto
+
+ul {
+    margin 10px 0
+}
+
+li {
+    ENTRY($entry_color, $color)
+    a {
+        padding 5px 10px
+    }
+    &.tag > a {
+        .button_icon {
+            color: $tag_color
+        }
+    }
+    @media DESKTOP {
+        a:hover {
+            background-color $select_background
+            .button_label {
+                color $select_label
+            }
+            .button_icon {
+                color $select_entry
+            }
+        }
+        &.tag:hover > a {
+            .button_icon {
+                color: $select_tag
+            }
+        }
+    }
+}
+
+.empty_div {
+    margin: 20px
+    color: ALMOST_BLACK_COLOR
+}
+
+
+}
+
